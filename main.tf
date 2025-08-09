@@ -158,3 +158,4 @@ terraform {
     key            = "tfstate/eks-cluster.tfstate"
     region         = "us-east-1"
   }
+}
