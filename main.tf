@@ -113,11 +113,12 @@ resource "aws_instance" "github_runner" {
     Name = "github-runner"
   }
 
-  # Reference the external user data script
+  # Reference the external user data script and pass the necessary variables
   user_data = templatefile("${path.module}/github-runner.sh", {
-    GH_OWNER = var.GH_OWNER
-    GH_REPO  = var.GH_REPO
-    GH_PAT   = var.GH_PAT
+    GH_OWNER      = var.GH_OWNER
+    GH_REPO       = var.GH_REPO
+    GH_PAT        = var.GH_PAT
+    RUNNER_VERSION = var.RUNNER_VERSION
   })
 }
 
@@ -141,4 +142,10 @@ variable "GH_REPO" {
 variable "GH_PAT" {
   description = "GitHub Personal Access Token"
   type        = string
+}
+
+variable "RUNNER_VERSION" {
+  description = "GitHub Runner Version"
+  type        = string
+  default     = "2.314.1"  # You can change this to the latest version if needed
 }
