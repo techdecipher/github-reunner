@@ -5,8 +5,8 @@ GH_OWNER="${GH_OWNER}"
 GH_REPO="${GH_REPO}"
 GH_PAT="${GH_PAT}"
 RUNNER_LABELS="self-hosted,eks"
-GH_RUNNER_URL="https://github.com/${GH_OWNER}/${GH_REPO}"
-RUNNER_VERSION="2.314.1"
+GH_RUNNER_URL="${GH_RUNNER_URL}"
+RUNNER_VERSION="${RUNNER_VERSION}"
 
 # Create runner user if not exists
 id -u runner &>/dev/null || sudo useradd -m -s /bin/bash runner
