@@ -113,13 +113,14 @@ resource "aws_instance" "github_runner" {
     Name = "github-runner"
   }
 
+  # Passing environment variables using EC2 user_data
   user_data = <<-EOF
               #!/bin/bash
 
-              # Set variables
-              GH_OWNER="techdecipher"
-              GH_REPO="github-reunner"  # Replace with your actual repo
-              GH_PAT="${var.GH_PAT}"  # Reference passed environment variable
+              # Set variables (passed from Terraform)
+              GH_OWNER="${var.GH_OWNER}"
+              GH_REPO="${var.GH_REPO}"
+              GH_PAT="${var.GH_PAT}"
               RUNNER_LABELS="self-hosted,eks"
               GH_RUNNER_URL="https://github.com/${GH_OWNER}/${GH_REPO}"
               RUNNER_VERSION="2.314.1"
@@ -160,6 +161,16 @@ variable "AWS_REGION" {
   description = "AWS region to deploy resources"
   type        = string
   default     = "us-east-1"  # Update with your region
+}
+
+variable "GH_OWNER" {
+  description = "GitHub Owner"
+  type        = string
+}
+
+variable "GH_REPO" {
+  description = "GitHub Repository"
+  type        = string
 }
 
 variable "GH_PAT" {
