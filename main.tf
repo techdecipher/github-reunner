@@ -120,6 +120,7 @@ resource "aws_instance" "github_runner" {
     GH_PAT         = var.GH_PAT
     RUNNER_VERSION = var.RUNNER_VERSION
     GH_RUNNER_URL  = "https://github.com/${var.GH_OWNER}/${var.GH_REPO}"
+    RUNNER_LABELS  = "self-hosted,eks"
   })
 }
 
