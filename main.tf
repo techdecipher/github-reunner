@@ -114,16 +114,11 @@ resource "aws_instance" "github_runner" {
   }
 
   # Reference the external user data script
-  user_data = file("${path.module}/github-runner.sh")
-
-  # Environment Variables for GitHub Runner
-  environment {
-    variables = {
-      GH_OWNER = var.GH_OWNER
-      GH_REPO  = var.GH_REPO
-      GH_PAT   = var.GH_PAT
-    }
-  }
+  user_data = templatefile("${path.module}/github-runner.sh", {
+    GH_OWNER = var.GH_OWNER
+    GH_REPO  = var.GH_REPO
+    GH_PAT   = var.GH_PAT
+  })
 }
 
 # Variables for AWS Region and GitHub Personal Access Token
