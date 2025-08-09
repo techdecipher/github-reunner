@@ -151,3 +151,10 @@ variable "RUNNER_VERSION" {
   type        = string
   default     = "2.314.1"  # You can change this to the latest version if needed
 }
+
+terraform {
+  backend "s3" {
+    bucket         = "k8s-state99"
+    key            = "tfstate/eks-cluster.tfstate"
+    region         = "us-east-1"
+  }
